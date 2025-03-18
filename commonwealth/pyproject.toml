@@ -1,0 +1,30 @@
+[build-system]
+requires = [ "setuptools",]
+build-backend = "setuptools.build_meta"
+
+[project]
+requires-python = ">=3.9"
+name = "commonwealth"
+readme = "README.md"
+dynamic = [ "version",]
+dependencies = [ "ipython>=8.10", "jupyterlab>=3.0", "notebook", "kedro[jupyter]~=0.19.11", "kedro-datasets[pandas-csvdataset, pandas-exceldataset, pandas-parquetdataset, plotly-plotlydataset, plotly-jsondataset, matplotlib-matplotlibwriter]>=3.0", "kedro-viz>=6.7.0", "scikit-learn~=1.5.1", "seaborn~=0.12.1",]
+
+[project.scripts]
+commonwealth = "commonwealth.__main__:main"
+
+[tool.kedro]
+package_name = "commonwealth"
+project_name = "commonwealth"
+kedro_init_version = "0.19.11"
+tools = "['None']"
+example_pipeline = "True"
+source_dir = "src"
+
+[project.entry-points."kedro.hooks"]
+
+[tool.setuptools.dynamic.version]
+attr = "commonwealth.__version__"
+
+[tool.setuptools.packages.find]
+where = [ "src",]
+namespaces = false
