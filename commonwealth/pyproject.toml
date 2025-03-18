@@ -28,3 +28,6 @@ attr = "commonwealth.__version__"
 [tool.setuptools.packages.find]
 where = [ "src",]
 namespaces = false
+
+[tool.kedro_telemetry]
+project_id = "8cadc4c622434e488aa65a230b97cbd3"
