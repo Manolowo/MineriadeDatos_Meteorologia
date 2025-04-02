@@ -2,6 +2,10 @@ weatherAUS:
   type: pandas.CSVDataset
   filepath: data/01_raw/weatherAUS.csv
 
+weatherAUS_Imputado:
+  type: pandas.CSVDataset
+  filepath: data/02_intermediate/weatherAUS_Imputado.csv
+
 preprocessed_companies:
   type: pandas.ParquetDataset
   filepath: data/02_intermediate/preprocessed_companies.parquet
