@@ -1,15 +1,14 @@
-"""Project pipelines."""
-
 from kedro.framework.project import find_pipelines
 from kedro.pipeline import Pipeline
-
+from commonwealth.pipelines.data_cleaning import pipeline as data_cleaning
+from commonwealth.pipelines.data_understanding import pipeline as data_understanding
 
 def register_pipelines() -> dict[str, Pipeline]:
-    """Register the project's pipelines.
-
-    Returns:
-        A mapping from pipeline names to ``Pipeline`` objects.
-    """
-    pipelines = find_pipelines()
-    pipelines["__default__"] = sum(pipelines.values())
-    return pipelines
+    return {
+        "__default__": Pipeline([]),
+        "data_cleaning": data_cleaning.data_cleaning(),
+        "data_understanding": data_understanding.data_understanding(),
+        "2daFase_CRISP-DM": Pipeline(
+                    data_cleaning.data_cleaning().nodes + data_understanding.data_understanding().nodes
+                ),
+    }

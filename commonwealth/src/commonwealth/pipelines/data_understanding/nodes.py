@@ -4,40 +4,43 @@ import seaborn as sns
 import pickle
 import os
 from typing import Dict
+from kedro.pipeline import node, Pipeline
 
-def convertir_fecha(df: pd.DataFrame) -> pd.DataFrame:
-    df['Date'] = pd.to_datetime(df['Date'], errors='coerce')
-    df = df.dropna(subset=['Date'])
-    return df
+plt.switch_backend('Agg')
 
+# Funciones para generar gráficos
 def grafico_registros_ubicacion(df: pd.DataFrame) -> plt.Figure:
-    plt.figure(figsize=(12, 5))
-    df['Location'].value_counts().nlargest(30).plot(kind='bar')
-    plt.title("Número de registros por ubicación")
-    plt.xlabel("Ubicación")
-    plt.ylabel("Cantidad")
+    fig, ax = plt.subplots(figsize=(12, 5))
+    df['Location'].value_counts().nlargest(30).plot(kind='bar', ax=ax)
+    ax.set_title("Número de registros por ubicación")
+    ax.set_xlabel("Ubicación")
+    ax.set_ylabel("Cantidad")
     plt.xticks(rotation=45)
-    return plt.gcf()
+    plt.close(fig)
+    return fig
 
 def grafico_outliers(df: pd.DataFrame) -> plt.Figure:
     variables_numericas = ['Sunshine', 'Evaporation', 'Pressure9am', 'Pressure3pm', 
                            'WindGustSpeed', 'Humidity3pm', 'Temp3pm', 'WindSpeed3pm', 
                            'Humidity9am', 'Rainfall', 'WindSpeed9am', 'Temp9am', 'MinTemp', 'MaxTemp']
     
-    plt.figure(figsize=(15, 10))
+    fig, axes = plt.subplots(3, 5, figsize=(15, 10))
+    axes = axes.flatten()
     for i, columna in enumerate(variables_numericas):
-        plt.subplot(3, 5, i + 1)
-        sns.boxplot(y=df[columna])
-        plt.title(columna)
+        sns.boxplot(y=df[columna], ax=axes[i])
+        axes[i].set_title(columna)
+    
     plt.tight_layout()
-    return plt.gcf()
+    plt.close(fig)
+    return fig
 
 def grafico_correlaciones(df: pd.DataFrame) -> plt.Figure:
-    plt.figure(figsize=(12, 8))
+    fig, ax = plt.subplots(figsize=(12, 8))
     corr = df.corr(numeric_only=True)
-    sns.heatmap(corr, cmap="BrBG", annot=True)
-    plt.title("Matriz de Correlación")
-    return plt.gcf()
+    sns.heatmap(corr, cmap="BrBG", annot=True, ax=ax)
+    ax.set_title("Matriz de Correlación")
+    plt.close(fig)
+    return fig
 
 def grafico_clima_mensual(df: pd.DataFrame) -> plt.Figure:
     clima_mensual = df.groupby('Month_Name')[['MaxTemp', 'MinTemp', 'Rainfall', 'Humidity3pm', 'WindGustSpeed']].mean().round(2)
@@ -45,12 +48,13 @@ def grafico_clima_mensual(df: pd.DataFrame) -> plt.Figure:
                    'July', 'August', 'September', 'October', 'November', 'December']
     clima_mensual = clima_mensual.reindex(orden_meses)
 
-    plt.figure(figsize=(14, 8))
-    sns.heatmap(clima_mensual, annot=True, cmap="YlGnBu", fmt=".1f", annot_kws={"size": 12}, linewidths=0.5)
-    plt.title("Promedio Climático por Mes")
-    plt.ylabel("Mes")
-    plt.xlabel("Variable Climática")
-    return plt.gcf()
+    fig, ax = plt.subplots(figsize=(14, 8))
+    sns.heatmap(clima_mensual, annot=True, cmap="YlGnBu", fmt=".1f", annot_kws={"size": 12}, linewidths=0.5, ax=ax)
+    ax.set_title("Promedio Climático por Mes")
+    ax.set_ylabel("Mes")
+    ax.set_xlabel("Variable Climática")
+    plt.close(fig)
+    return fig
 
 def grafico_actividades_zona(df: pd.DataFrame) -> plt.Figure:
     condiciones = {
@@ -65,6 +69,8 @@ def grafico_actividades_zona(df: pd.DataFrame) -> plt.Figure:
     registros = []
     for actividad, condicion in condiciones.items():
         df_act = df.loc[condicion].copy()
+        df_act['Date'] = pd.to_datetime(df_act['Date'], errors='coerce')
+        df_act = df_act.dropna(subset=['Date'])
         df_act['Mes'] = df_act['Date'].dt.strftime('%B')
         df_act['Actividad'] = actividad
         registros.append(df_act[['Mes', 'Actividad']])
@@ -78,22 +84,19 @@ def grafico_actividades_zona(df: pd.DataFrame) -> plt.Figure:
               .size()
               .reset_index(name='Dias_Ideales'))
 
-    plt.figure(figsize=(14, 8))
-    sns.barplot(data=conteo, x='Mes', y='Dias_Ideales', hue='Actividad')
-    plt.title("Días ideales por Actividad y Mes (Registros Históricos)")
-    plt.ylabel("Cantidad de días ideales")
-    plt.xlabel("Mes")
+    fig, ax = plt.subplots(figsize=(14, 8))
+    sns.barplot(data=conteo, x='Mes', y='Dias_Ideales', hue='Actividad', ax=ax)
+    ax.set_title("Días ideales por Actividad y Mes (Registros Históricos)")
+    ax.set_ylabel("Cantidad de días ideales")
+    ax.set_xlabel("Mes")
     plt.xticks(rotation=45)
-    plt.legend(title="Actividad", bbox_to_anchor=(1.05, 1), loc='upper left')
+    ax.legend(title="Actividad", bbox_to_anchor=(1.05, 1), loc='upper left')
     plt.tight_layout()
-    return plt.gcf()
+    plt.close(fig)
+    return fig
 
-def generar_todos_los_graficos(df: pd.DataFrame) -> Dict:
+def guardar_graficos(df: pd.DataFrame) -> Dict:
     """Genera y guarda todos los gráficos en la carpeta especificada"""
-
-    # Asegúrate de convertir la columna 'Date' antes de crear los gráficos
-    df = convertir_fecha(df)
-
     output_path = "data/08_reporting"
     os.makedirs(output_path, exist_ok=True)
 
@@ -115,10 +118,9 @@ def generar_todos_los_graficos(df: pd.DataFrame) -> Dict:
             continue
         plt.close(grafico)
 
-    # Guardar los gráficos como un pickle
+        
     with open(os.path.join(output_path, "data_understanding_report.pkl"), "wb") as f:
         pickle.dump(graficos, f)
 
     print(f"Gráficos guardados en {output_path}")
-
     return {"graficos": graficos}
