@@ -6,3 +6,6 @@ weatherAUS_Cleaned:
   type: pandas.CSVDataset
   filepath: data/02_intermediate/weatherAUS_Cleaned.csv
 
+weatherAUS_primary:
+  type: pandas.CSVDataset
+  filepath: data/03_primary/weatherAUS_primary.csv
