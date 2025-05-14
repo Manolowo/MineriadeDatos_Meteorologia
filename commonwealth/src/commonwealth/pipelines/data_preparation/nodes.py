@@ -37,6 +37,48 @@ def clean_weather_data(df: pd.DataFrame) -> pd.DataFrame:
         inplace=True
     )
 
+    # Crear columnas binarias para actividades
+    conditions = {
+        'Surf': (
+            (df_Cleaned['WindSpeed_max'].between(15, 35)) & 
+            (df_Cleaned['RainToday'] == 0) & 
+            (df_Cleaned['RISK_MM'] < 1) &
+            (df_Cleaned['Cloud_avg'] < 70)
+        ),
+        'Senderismo': (
+            (df_Cleaned['RainToday'] == 0) & 
+            (df_Cleaned['WindSpeed_max'] < 40) & 
+            (df_Cleaned['Temp_avg'].between(10, 32)) &
+            (df_Cleaned['Humidity_avg'] < 80)
+        ),
+        'Buceo': (
+            (df_Cleaned['Temp_avg'].between(24, 30)) & 
+            (df_Cleaned['RainToday'] == 0) & 
+            (df_Cleaned['WindSpeed_max'] < 25) &
+            (df_Cleaned['Sunshine'] > 5)
+        ),
+        'Kayak': (
+            (df_Cleaned['WindSpeed_max'].between(5, 25)) & 
+            (df_Cleaned['Rainfall'] < 3) &
+            (df_Cleaned['Temp_avg'] > 15)
+        ),
+        'Ciclismo': (
+            (df_Cleaned['RainToday'] == 0) & 
+            (df_Cleaned['WindSpeed_max'] < 30) & 
+            (df_Cleaned['Temp_avg'].between(10, 35)) &
+            (df_Cleaned['Humidity_avg'] < 75)
+        ),
+        'Camping': (
+            (df_Cleaned['WindSpeed_max'] < 20) & 
+            (df_Cleaned['Temp_avg'].between(15, 28)) & 
+            (df_Cleaned['Rainfall'] == 0) &
+            (df_Cleaned['Cloud_avg'] < 50)
+        )
+    }
+
+    for activity, condition in conditions.items():
+        df_Cleaned[f'activity_{activity}'] = condition.astype(int)
+
     # Reordenar columnas
     nuevo_orden = [
         'Date', 'Year', 'Month', 'Month_Name',
@@ -46,6 +88,8 @@ def clean_weather_data(df: pd.DataFrame) -> pd.DataFrame:
         'WindDir_avg', 'WindSpeed_max', 'WindSpeed_avg',
         'Humidity_avg', 'Pressure_avg', 'Cloud_avg',
         'RainToday', 'RISK_MM', 'RainTomorrow',
+        'activity_Surf', 'activity_Senderismo', 'activity_Buceo', 
+        'activity_Kayak', 'activity_Ciclismo', 'activity_Camping'
     ]
     df_Cleaned = df_Cleaned[nuevo_orden]
 
