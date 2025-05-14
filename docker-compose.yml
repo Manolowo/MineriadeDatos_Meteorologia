@@ -1,0 +1,35 @@
+version: '3.8'
+services:
+  # Servicio principal de Kedro
+  kedro:
+    build: .
+    container_name: kedro_app
+    volumes:
+      - ./data:/app/data    
+      - ./conf:/app/conf      
+    ports:
+      - "8000:8000"             
+    command: kedro run          
+
+  # Servicio de Kedro-Viz (visualización)
+  viz:
+    build: .
+    ports:
+      - "4142:4141"
+    command: >
+      sh -c "kedro viz --host 0.0.0.0 --port 4141
+            --no-browser --autoreload"
+    volumes:
+      - .:/app
+
+  # Servicio de JupyterLab
+  jupyter:
+    build: .
+    container_name: kedro_jupyter
+    ports:
+      - "8888:8888"        
+    volumes:
+      - .:/app                    
+    environment:
+      - JUPYTER_TOKEN=kedro        
+    command: jupyter lab --ip=0.0.0.0 --port=8888 --no-browser --allow-root --NotebookApp.token=${JUPYTER_TOKEN}
