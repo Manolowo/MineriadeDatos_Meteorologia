@@ -1,1 +1,2 @@
 sqlite_output_path: data/03_primary/weatherAUS.sqlite
+model_output_path: data/06_models/modelos_entrenados.pkl
