@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>TourXtreme - Aventuras Extremas</title>
+  <link rel="stylesheet" href="../static/css/styles.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+  
+  <!-- Menú de navegación -->
+  <header class="menu-container">
+    <nav class="navbar">
+      <div class="navbar-brand">
+        <a href="{{ url_for('home')}}">
+          <img src="" alt="TourXtreme Logo" class="logo">
+          <span>TourXtreme</span>
+        </a>
+      </div>
+      <button class="navbar-toggler">
+        <div class="hamburger">
+          <span></span>
+          <span></span>
+          <span></span>
+        </div>
+      </button>
+      <div class="navbar-collapse">
+        <div style="padding-right:10px" class="navbar-actions">
+          <a href="{{ url_for('home') }}" class="btn-primary">Volver a Inicio</a>
+        </div>
+      </div>
+    </nav>
+  </header>
+
+  <!-- Pie de página -->
+  <footer class="footer">
+    <div class="footer-links">
+      <ul>
+        <li><a href="#nosotros">Sobre Nosotros</a></li>
+        <li><a href="#servicios">Servicios</a></li>
+        <li><a href="#contacto">Contacto</a></li>
+        <li><a href="#">Términos y Condiciones</a></li>
+      </ul>
+    </div>
+    <div class="social-links">
+      <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+      <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+      <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+      <a href="#" aria-label="TikTok"><i class="fab fa-tiktok"></i></a>
+      <a href="#" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
+    </div>
+    <div class="copyright">
+      <p>&copy; 2023 TourXtreme - Todos los derechos reservados</p>
+    </div>
+  </footer>
+
+  <script src="../static/js/script.js"></script>
+</body>
+</html>

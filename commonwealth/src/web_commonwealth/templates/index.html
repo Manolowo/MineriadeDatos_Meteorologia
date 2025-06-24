@@ -1,12 +1,221 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
-    <meta charset="UTF-8" />
-    <title>Web Commonwealth</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}" />
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>TourXtreme</title>
+  <link rel="stylesheet" href="../static/css/styles.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 </head>
 <body>
-    <h1>Bienvenido a Web Commonwealth</h1>
-    <p>Esta es la página principal para diseñar tu web con Flask.</p>
+  
+  <!-- Menú de navegación -->
+  <header class="menu-container">
+    <nav class="navbar">
+      <div class="navbar-br and">
+        <a href="{{ url_for('home')}}">
+          <img src="" alt="TourXtreme Logo" class="logo">
+          <span>TourXtreme</span>
+        </a>
+      </div>
+      <button class="navbar-toggler">
+        <div class="hamburger">
+          <span></span>
+          <span></span>
+          <span></span>
+        </div>
+      </button>
+      <div class="navbar-collapse">
+        <ul class="navbar-nav">
+          <li><a href="#contacto">Contacto</a></li>
+          <li><a href="#nosotros">Sobre Nosotros</a></li>
+          <li><a href="#servicios">Nuestros Servicios</a></li>
+        </ul>
+        <div style="padding-right:10px" class="navbar-actions">
+          <a href="#" class="btn-primary">Empezar Ahora</a>
+        </div>
+      </div>
+    </nav>
+  </header>
+
+  <!-- Sección Hero -->
+  <section id="inicio" class="hero-section">
+    <div class="hero-content">
+      <h1>Bienvenido a <strong>TourXtreme</strong></h1>
+      <p>Vive la aventura de tu vida con nuestros tours extremos diseñados para los más atrevidos. Descubre lugares increíbles y experimenta emociones únicas.</p>
+      <a href="#" class="btn-primary">Empezar Ahora</a>
+    </div>
+    <div class="hero-image">
+      <img src="#" alt="Aventura extrema con TourXtreme">
+    </div>
+  </section>
+
+  <!-- Nuestros Servicios -->
+  <section id="servicios" class="services-section">
+    <div class="section-header">
+      <h2>Nuestros Servicios</h2>
+      <p>Ofrecemos experiencias únicas adaptadas a todos los niveles de aventureros.</p>
+    </div>
+    <div class="services-grid">
+      <div class="service-card">
+        <div class="service-image">
+          <img src="#" alt="Escalada extrema">
+        </div>
+        <div class="service-content">
+          <h3>Escalada en Roca</h3>
+          <p>Domina las paredes más desafiantes con nuestros guías expertos. Equipo incluido y todas las medidas de seguridad.</p>
+          <a href="#" class="btn-secondary">Ver más</a>
+        </div>
+      </div>
+      <div class="service-card">
+        <div class="service-image">
+          <img src="#" alt="Rafting extremo">
+        </div>
+        <div class="service-content">
+          <h3>Rafting Extremo</h3>
+          <p>Desafía los rápidos más emocionantes en nuestros tours de rafting. Experiencia para todos los niveles.</p>
+          <a href="#" class="btn-secondary">Utilizar Modelo</a>
+        </div>
+      </div>
+      <div class="service-card">
+        <div class="service-image">
+          <img src="#" alt="Parapente">
+        </div>
+        <div class="service-content">
+          <h3>Vuelo en Parapente</h3>
+          <p>Experimenta la libertad de volar con nuestras rutas de parapente en los lugares más espectaculares.</p>
+          <a href="#" class="btn-secondary">Ver más</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Sobre Nosotros -->
+  <section id="nosotros" class="about-section">
+    <div class="section-header">
+      <h2>Sobre Nosotros</h2>
+      <p>Conoce más sobre nuestra pasión por los deportes extremos y nuestra filosofía de aventura segura.</p>
+    </div>
+    <div class="video-container">
+      <!-- Espacio reservado para el video -->
+      <div class="video-placeholder">
+        <i class="fas fa-video"></i>
+        <p>Video de presentación</p>
+        <!-- <iframe src="URL_DE_VIDEO" frameborder="0" allowfullscreen></iframe> -->
+      </div>
+    </div>
+  </section>
+
+  <!-- ¿Por qué nosotros? -->
+  <section class="features-section">
+    <div class="section-header">
+      <h2>¿Por qué elegirnos?</h2>
+    </div>
+    <div class="features-grid">
+      <div class="feature-card">
+        <div class="feature-icon">
+          <i class="fas fa-comments-dollar"></i>
+        </div>
+        <div class="feature-content">
+          <h3>Consultas Gratis</h3>
+          <p>Asesoramiento personalizado sin costo para planificar tu aventura perfecta.</p>
+        </div>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">
+          <i class="fas fa-user-check"></i>
+        </div>
+        <div class="feature-content">
+          <h3>Fácil Reservación</h3>
+          <p>Proceso de reserva sencillo y rápido con confirmación inmediata.</p>
+        </div>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">
+          <i class="fas fa-route"></i>
+        </div>
+        <div class="feature-content">
+          <h3>Rutas Personalizadas</h3>
+          <p>Adaptamos cada tour a tus habilidades y preferencias para una experiencia única.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Formulario de Contacto -->
+  <section id="formulario" class="contact-form-section">
+    <div class="section-header">
+      <h2>Formulario de Contacto</h2>
+      <p>Completa el formulario y nos pondremos en contacto contigo para planificar tu aventura.</p>
+    </div>
+    <form class="contact-form">
+      <div class="form-row">
+        <div class="form-group">
+          <input type="text" id="name" name="name" placeholder="Nombre" required>
+        </div>
+        <div class="form-group">
+          <input type="email" id="email" name="email" placeholder="Correo electrónico" required>
+        </div>
+      </div>
+      <div class="form-group">
+        <input type="tel" id="phone" name="phone" placeholder="Número de teléfono">
+      </div>
+      <div class="form-group">
+        <textarea id="message" name="message" placeholder="Cuéntanos sobre tu aventura ideal..." rows="4" required></textarea>
+      </div>
+      <button type="submit" class="btn-primary">Enviar Formulario</button>
+    </form>
+  </section>
+
+  <!-- Información de Contacto -->
+  <section id="contacto" class="contact-info-section">
+    <div class="section-header">
+      <h2>Información de contacto</h2>
+    </div>
+    <div class="contact-container">
+      <div style="padding-left: 10px;" class="contact-details">
+        <h3>Contáctanos</h3>
+        <ul>
+          <li><i class="fas fa-phone"></i> Teléfono: <a href="#">0 (800) 123 45 67</a></li>
+          <li><i class="fab fa-whatsapp"></i> WhatsApp: <a href="#">0 (800) 123 45 67</a></li>
+          <li><i class="fas fa-envelope"></i> Email: <a href="#">tourxtreme@gmail.com</a></li>
+          <li><i class="fas fa-map-marker-alt"></i> Dirección: 350 5th Ave, AUS</li>
+          <li><i class="fas fa-clock"></i> Horario: 9:00AM - 6:00PM</li>
+        </ul>
+      </div>
+      <div class="contact-map">
+        <div class="map-placeholder">
+          <i class="fas fa-map-marked-alt"></i>
+          <p>Mapa de ubicación</p>
+          <!-- <iframe src="URL_DE_GOOGLE_MAPS" frameborder="0" allowfullscreen></iframe> -->
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Pie de página -->
+  <footer class="footer">
+    <div class="footer-links">
+      <ul>
+        <li><a href="#nosotros">Sobre Nosotros</a></li>
+        <li><a href="#servicios">Servicios</a></li>
+        <li><a href="#contacto">Contacto</a></li>
+        <li><a href="#">Términos y Condiciones</a></li>
+      </ul>
+    </div>
+    <div class="social-links">
+      <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+      <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+      <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+      <a href="#" aria-label="TikTok"><i class="fab fa-tiktok"></i></a>
+      <a href="#" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
+    </div>
+    <div class="copyright">
+      <p>&copy; 2023 TourXtreme - Todos los derechos reservados</p>
+    </div>
+  </footer>
+
+  <script src="../static/js/script.js"></script>
 </body>
 </html>
