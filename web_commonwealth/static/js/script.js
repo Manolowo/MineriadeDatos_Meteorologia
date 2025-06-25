@@ -69,4 +69,22 @@ document.addEventListener('DOMContentLoaded', function() {
   
   window.addEventListener('scroll', animateOnScroll);
   animateOnScroll();
+
+  // Manejo del formulario de contacto
+  const contactForm = document.querySelector('.contact-form');
+  if (contactForm) {
+    contactForm.addEventListener('submit', function(e) {
+      e.preventDefault();
+
+      Swal.fire({
+        title: '¡Mensaje enviado!',
+        text: 'Gracias por contactarnos. Nos pondremos en contacto contigo pronto.',
+        icon: 'success',
+        confirmButtonText: 'Aceptar',
+        confirmButtonColor: '#ff6b6b'
+      }).then(() => {
+        contactForm.reset();
+      });
+    });
+  }
 });

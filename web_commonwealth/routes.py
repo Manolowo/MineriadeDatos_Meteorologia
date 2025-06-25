@@ -41,10 +41,8 @@ def register_routes(app):
             }
             location_id = int(request.form["Location_encoded"])
 
-            # Definir base del proyecto con ruta absoluta
             base_dir = Path(__file__).resolve().parent.parent.parent / "mineriadedatos_meteorologia"
 
-            # Cargar modelo entrenado y CSV con rutas absolutas
             modelos_path = base_dir / "commonwealth" / "data" / "06_models" / "modelos_entrenados.pkl"
             with open(modelos_path, "rb") as f:
                 modelos_entrenados = pickle.load(f)
@@ -54,7 +52,6 @@ def register_routes(app):
 
             predicciones = predecir_semana_completa(features_dia, location_id, df, modelos_entrenados)
 
-            # Convertir numpy types a tipos nativos para poder guardarlo en session
             predicciones = convert_numpy_types(predicciones)
 
             session["predicciones"] = predicciones

@@ -6,6 +6,31 @@
     <link rel="stylesheet" href="../static/css/styles.css">
 </head>
     <body>
+            <!-- Menú de navegación -->
+    <header class="menu-container">
+      <nav class="navbar">
+        <div class="navbar-brand">
+          <a href="{{ url_for('home')}}">
+          <img src="{{ url_for('static', filename='assets/img/logo.jpeg') }}" alt="TourXtreme Logo" class="logo">
+        </a>
+        </div>
+        <button class="navbar-toggler">
+          <div class="hamburger">
+            <span></span>
+            <span></span>
+            <span></span>
+          </div>
+        </button>
+        <div class="navbar-collapse">
+          <div style="padding-right: 10px" class="navbar-actions">
+            <a href="{{ url_for('home') }}" class="btn-primary"
+              >Volver a Inicio</a
+            >
+          </div>
+        </div>
+      </nav>
+    </header>
+
     <h2>Resultado de la Predicción para la Semana</h2>
     <ul>
         {% for dia, valor in predicciones.items() %}

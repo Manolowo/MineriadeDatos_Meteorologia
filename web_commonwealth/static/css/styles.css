@@ -9,6 +9,7 @@
   --text-light: #777;
   --font-main: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   --font-heading: 'Montserrat', sans-serif;
+  --header-height: 80px;
 }
 
 /* Reset y estilos base */
@@ -23,6 +24,7 @@ body {
   color: var(--text-color);
   line-height: 1.6;
   background-color: #f9f9f9;
+  padding-top: var(--header-height);
 }
 
 a {
@@ -124,27 +126,33 @@ img {
   top: 0;
   left: 0;
   width: 100%;
+  height: var(--header-height);
   z-index: 1000;
-  background-color: rgba(255, 255, 255, 0.95);
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  background-color: rgba(255, 255, 255, 0.98);
+  box-shadow: 0 2px 15px rgba(0, 0, 0, 0.1);
   transition: all 0.3s ease;
+  backdrop-filter: blur(5px);
 }
 
 .navbar {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 20px 0;
+  padding: 15px 30px;
 }
 
 .navbar-brand {
   display: flex;
   align-items: center;
+  text-decoration: none;
 }
 
-.navbar-brand .logo {
-  height: 40px;
-  margin-right: 10px;
+.navbar .logo {
+  height: 45px;
+  width: auto;
+  object-fit: contain;
+  border-radius: 30px;
+  margin-right: 12px;
 }
 
 .navbar-brand span {
@@ -171,6 +179,7 @@ img {
   transition: all 0.3s ease;
 }
 
+/* Collapse del navbar */
 .navbar-collapse {
   display: flex;
   align-items: center;
@@ -190,6 +199,7 @@ img {
   color: var(--dark-color);
   transition: color 0.3s ease;
   position: relative;
+  text-decoration: none;
 }
 
 .navbar-nav a:hover {
@@ -211,12 +221,12 @@ img {
   width: 100%;
 }
 
+
 /* Sección Hero */
 .hero-section {
-  padding: 150px 0 80px;
+  padding: 60px 0 80px;
   background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
 }
-
 .hero-content {
   text-align: center;
   max-width: 800px;
@@ -324,17 +334,17 @@ img {
 }
 
 .video-container {
-  max-width: 800px;
-  margin: 0 auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 20px;
 }
 
 .video-placeholder {
-  background-color: #e9ecef;
+  max-width: 640px;
+  width: 100%;
   border-radius: 10px;
-  padding: 60px 20px;
-  text-align: center;
-  color: var(--text-light);
-  font-size: 1.2rem;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
 }
 
 .video-placeholder i {
@@ -560,6 +570,26 @@ img {
 }
 
 /* Responsive Design */
+@media (max-width: 768px) {
+  :root {
+    --header-height: 70px;
+  }
+  
+  .navbar-collapse {
+    top: var(--header-height);
+  }
+}
+
+@media (max-width: 576px) {
+  :root {
+    --header-height: 60px;
+  }
+  
+  .hero-section {
+    padding-top: 30px;
+  }
+}
+
 @media (max-width: 992px) {
   .hero-content h1 {
     font-size: 2.8rem;

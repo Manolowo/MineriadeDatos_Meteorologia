@@ -15,8 +15,7 @@
     <nav class="navbar">
       <div class="navbar-br and">
         <a href="{{ url_for('home')}}">
-          <img src="" alt="TourXtreme Logo" class="logo">
-          <span>TourXtreme</span>
+          <img src="{{ url_for('static', filename='assets/img/logo.jpeg') }}" alt="TourXtreme Logo" class="logo">
         </a>
       </div>
       <button class="navbar-toggler">
@@ -33,26 +32,30 @@
           <li><a href="#servicios">Nuestros Servicios</a></li>
         </ul>
         <div style="padding-right:10px" class="navbar-actions">
-          <a href="#" class="btn-primary">Empezar Ahora</a>
+          <a href="{{ url_for('prediction_form')}}" class="btn-primary">Empezar Ahora</a>
         </div>
       </div>
     </nav>
   </header>
 
-  <!-- Sección Hero -->
-  <section id="inicio" class="hero-section">
-    <div class="hero-content">
-      <h1>Bienvenido a <strong>TourXtreme</strong></h1>
-      <p>Vive la aventura de tu vida con nuestros tours extremos diseñados para los más atrevidos. Descubre lugares increíbles y experimenta emociones únicas.</p>
-      <a href="#" class="btn-primary">Empezar Ahora</a>
-    </div>
-    <div class="hero-image">
-      <img src="#" alt="Aventura extrema con TourXtreme">
-    </div>
-  </section>
+<!-- Sección Hero -->
+    <section id="inicio" class="hero-section">
+      <div class="hero-content">
+        <h1>Bienvenido a <strong>TourXtreme</strong></h1>
+        <p>Vive la aventura de tu vida con nuestros tours extremos diseñados para los más atrevidos. Gracias a nuestro modelo predictivo podemos obtener las mejores actividades en las mejores condiciones del clima, descubre lugares increíbles y experimenta emociones únicas. Pero como nos preocupamos de la seguridad, nos aseguramos de que nuestro modelo predictivo haya alcanzado una precisión del 97%, gracias a el, podemos adaptar nuestros servicios para ofrecer la mejor experiencia en un entorno seguro.</p>
+        <a href="{{ url_for('prediction_form')}}" class="btn-primary">Empezar Ahora</a>
+        <br>
+        <br>
+        <div class="hero-image">
+          <img src="{{ url_for('static', filename='assets/img/01.png') }}" alt="Aventura extrema con TourXtreme">
+        </div>
+        <p>Nuestros clientes en campo disfrutando del senderismo de un hermoso lugar en las mejores condiciones.</p>
+      </div>
 
-  <!-- Nuestros Servicios -->
-  <section id="servicios" class="services-section">
+    </section>
+
+    <!-- Nuestros Servicios -->
+  <section id="servicios" class="services-section" style="padding: 15px;">
     <div class="section-header">
       <h2>Nuestros Servicios</h2>
       <p>Ofrecemos experiencias únicas adaptadas a todos los niveles de aventureros.</p>
@@ -60,31 +63,61 @@
     <div class="services-grid">
       <div class="service-card">
         <div class="service-image">
-          <img src="#" alt="Escalada extrema">
+          <img src="{{ url_for('static', filename='assets/img/02.jpeg') }}" alt="Senderismo">
         </div>
         <div class="service-content">
-          <h3>Escalada en Roca</h3>
-          <p>Domina las paredes más desafiantes con nuestros guías expertos. Equipo incluido y todas las medidas de seguridad.</p>
+          <h3>Senderismo</h3>
+          <p>Explora los paisajes más impresionantes con rutas guiadas para todos los niveles. Disfruta de la naturaleza con nuestros expertos.</p>
           <a href="#" class="btn-secondary">Ver más</a>
         </div>
       </div>
       <div class="service-card">
         <div class="service-image">
-          <img src="#" alt="Rafting extremo">
+          <img src="{{ url_for('static', filename='assets/img/03.jpeg') }}" alt="Surf">
         </div>
         <div class="service-content">
-          <h3>Rafting Extremo</h3>
-          <p>Desafía los rápidos más emocionantes en nuestros tours de rafting. Experiencia para todos los niveles.</p>
-          <a href="#" class="btn-secondary">Utilizar Modelo</a>
+          <h3>Surf</h3>
+          <p>Aprende a domar las olas con instructores certificados. Clases para principiantes y avanzados en las mejores playas.</p>
+          <a href="" class="btn-secondary">Ver más</a>
         </div>
       </div>
       <div class="service-card">
         <div class="service-image">
-          <img src="#" alt="Parapente">
+          <img src="{{ url_for('static', filename='assets/img/04.jpeg') }}" alt="Buceo">
         </div>
         <div class="service-content">
-          <h3>Vuelo en Parapente</h3>
-          <p>Experimenta la libertad de volar con nuestras rutas de parapente en los lugares más espectaculares.</p>
+          <h3>Buceo</h3>
+          <p>Descubre el mundo submarino con nuestras inmersiones guiadas. Equipo profesional y certificación PADI disponible.</p>
+          <a href="#" class="btn-secondary">Ver más</a>
+        </div>
+      </div>
+      <div class="service-card">
+        <div class="service-image">
+          <img src="{{ url_for('static', filename='assets/img/05.jpeg') }}" alt="Kayak">
+        </div>
+        <div class="service-content">
+          <h3>Kayak</h3>
+          <p>Navega por ríos y costas espectaculares. Tours guiados con diferentes niveles de dificultad para toda la familia.</p>
+          <a href="#" class="btn-secondary">Ver más</a>
+        </div>
+      </div>
+      <div class="service-card">
+        <div class="service-image">
+          <img src="{{ url_for('static', filename='assets/img/06.jpeg') }}" alt="Ciclismo">
+        </div>
+        <div class="service-content">
+          <h3>Ciclismo</h3>
+          <p>Recorre senderos emocionantes con nuestras rutas diseñadas para ciclistas de todos los niveles. Alquiler de equipo disponible.</p>
+          <a href="#" class="btn-secondary">Ver más</a>
+        </div>
+      </div>
+      <div class="service-card">
+        <div class="service-image">
+          <img src="{{ url_for('static', filename='assets/img/07.jpeg') }}" alt="Camping">
+        </div>
+        <div class="service-content">
+          <h3>Camping Guiado</h3>
+          <p>Vive una experiencia única en la naturaleza con nuestros paquetes todo incluido. Equipo de camping premium y guías expertos.</p>
           <a href="#" class="btn-secondary">Ver más</a>
         </div>
       </div>
@@ -98,12 +131,10 @@
       <p>Conoce más sobre nuestra pasión por los deportes extremos y nuestra filosofía de aventura segura.</p>
     </div>
     <div class="video-container">
-      <!-- Espacio reservado para el video -->
-      <div class="video-placeholder">
-        <i class="fas fa-video"></i>
-        <p>Video de presentación</p>
-        <!-- <iframe src="URL_DE_VIDEO" frameborder="0" allowfullscreen></iframe> -->
-      </div>
+      <video class="video-placeholder" controls>
+          <source src="{{ url_for('static', filename='assets/video/pitch_tourxtreme.mp4') }}" type="video/mp4">
+          Tu navegador no soporta la reproducción de video.
+      </video>
     </div>
   </section>
 
@@ -184,13 +215,20 @@
           <li><i class="fas fa-clock"></i> Horario: 9:00AM - 6:00PM</li>
         </ul>
       </div>
-      <div class="contact-map">
-        <div class="map-placeholder">
-          <i class="fas fa-map-marked-alt"></i>
-          <p>Mapa de ubicación</p>
-          <!-- <iframe src="URL_DE_GOOGLE_MAPS" frameborder="0" allowfullscreen></iframe> -->
-        </div>
-      </div>
+<div class="contact-map">
+  <div class="map-placeholder">
+    <iframe
+      src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3151.835434509285!2d144.95373631531888!3d-37.81627917975145!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x6ad65d43f2d7d1cf%3A0x2b0bfc1e25e6d6ab!2sMelbourne%20VIC%2C%20Australia!5e0!3m2!1sen!2sau!4v1719314820000!5m2!1sen!2sau"
+      width="100%"
+      height="300"
+      style="border:0; border-radius: 10px; box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);"
+      allowfullscreen=""
+      loading="lazy"
+      referrerpolicy="no-referrer-when-downgrade">
+    </iframe>
+  </div>
+</div>
+
     </div>
   </section>
 
@@ -217,5 +255,6 @@
   </footer>
 
   <script src="../static/js/script.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </body>
 </html>

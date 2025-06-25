@@ -17,9 +17,8 @@
       <nav class="navbar">
         <div class="navbar-brand">
           <a href="{{ url_for('home')}}">
-            <img src="" alt="TourXtreme Logo" class="logo" />
-            <span>TourXtreme</span>
-          </a>
+          <img src="{{ url_for('static', filename='assets/img/logo.jpeg') }}" alt="TourXtreme Logo" class="logo">
+        </a>
         </div>
         <button class="navbar-toggler">
           <div class="hamburger">
@@ -40,9 +39,6 @@
 
     <!-- Formulario para predicción -->
     <main class="form-container" style="padding: 20px; max-width: 700px; margin: auto">
-      <br>
-      <br>
-      <br>
     <h2 class="form-title">Formulario de Predicción</h2>
     <form method="POST" class="prediction-form" action="{{ url_for('predict') }}">
       <label for="Temp_avg" class="form-label">Temperatura Promedio (°C):</label>
