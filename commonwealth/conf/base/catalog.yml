@@ -9,3 +9,7 @@ weatherAUS_Cleaned:
 weatherAUS_primary:
   type: pandas.CSVDataset
   filepath: data/03_primary/weatherAUS_primary.csv
+
+modelos_entrenados:
+  type: pickle.PickleDataset
+  filepath: data/06_models/modelos_entrenados.pkl

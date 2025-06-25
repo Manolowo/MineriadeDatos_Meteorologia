@@ -4,6 +4,7 @@ from commonwealth.pipelines.data_cleaning import pipeline as data_cleaning
 from commonwealth.pipelines.data_understanding import pipeline as data_understanding
 from commonwealth.pipelines.data_preparation import pipeline as data_preparation
 from commonwealth.pipelines.modeling import pipeline as modeling
+from commonwealth.pipelines.predict_week import pipeline as predict_week
 
 def register_pipelines() -> dict[str, Pipeline]:
     return {
@@ -15,4 +16,5 @@ def register_pipelines() -> dict[str, Pipeline]:
         ),
         "data_preparation": data_preparation.data_preparation(),
         "modeling": modeling.modeling(),
+        "predict_week": predict_week.predict_week(),
     }
