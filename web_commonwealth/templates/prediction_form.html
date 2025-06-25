@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>TourXtreme - Aventuras Extremas</title>
+    <link rel="stylesheet" href="../static/css/styles.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+    />
+  </head>
+  <body>
+    <!-- Menú de navegación -->
+    <header class="menu-container">
+      <nav class="navbar">
+        <div class="navbar-brand">
+          <a href="{{ url_for('home')}}">
+            <img src="" alt="TourXtreme Logo" class="logo" />
+            <span>TourXtreme</span>
+          </a>
+        </div>
+        <button class="navbar-toggler">
+          <div class="hamburger">
+            <span></span>
+            <span></span>
+            <span></span>
+          </div>
+        </button>
+        <div class="navbar-collapse">
+          <div style="padding-right: 10px" class="navbar-actions">
+            <a href="{{ url_for('home') }}" class="btn-primary"
+              >Volver a Inicio</a
+            >
+          </div>
+        </div>
+      </nav>
+    </header>
+
+    <!-- Formulario para predicción -->
+    <main class="form-container" style="padding: 20px; max-width: 700px; margin: auto">
+      <br>
+      <br>
+      <br>
+    <h2 class="form-title">Formulario de Predicción</h2>
+    <form method="POST" class="prediction-form" action="{{ url_for('predict') }}">
+      <label for="Temp_avg" class="form-label">Temperatura Promedio (°C):</label>
+      <input
+        type="number"
+        step="0.1"
+        id="Temp_avg"
+        name="Temp_avg"
+        class="form-input"
+        required
+      />
+
+      <label for="WindSpeed_max" class="form-label">Velocidad máxima del viento (km/h):</label>
+      <input
+        type="number"
+        step="0.1"
+        id="WindSpeed_max"
+        name="WindSpeed_max"
+        class="form-input"
+        required
+      />
+
+      <label for="RainToday" class="form-label">¿Lluvia Hoy?:</label>
+      <select id="RainToday" name="RainToday" class="form-select" required>
+        <option value="0">No</option>
+        <option value="1">Sí</option>
+      </select>
+
+      <label for="Rainfall" class="form-label">Precipitación (mm):</label>
+      <input
+        type="number"
+        step="0.1"
+        id="Rainfall"
+        name="Rainfall"
+        class="form-input"
+        required
+      />
+
+      <label for="RISK_MM" class="form-label">Riesgo de lluvia (mm):</label>
+      <input
+        type="number"
+        step="0.1"
+        id="RISK_MM"
+        name="RISK_MM"
+        class="form-input"
+        required
+      />
+
+      <label for="Humidity_avg" class="form-label">Humedad promedio (%):</label>
+      <input
+        type="number"
+        step="0.1"
+        id="Humidity_avg"
+        name="Humidity_avg"
+        class="form-input"
+        required
+      />
+
+      <label for="Location_encoded" class="form-label">Selecciona la Localidad:</label>
+      <select id="Location_encoded" name="Location_encoded" class="form-select" required>
+        <option value="" disabled selected>-- Selecciona una localidad --</option>
+        <option value="0">Adelaide</option>
+        <option value="1">Albany</option>
+        <option value="2">Albury</option>
+        <option value="3">AliceSprings</option>
+        <option value="4">BadgerysCreek</option>
+        <option value="5">Ballarat</option>
+        <option value="6">Bendigo</option>
+        <option value="7">Brisbane</option>
+        <option value="8">Cairns</option>
+        <option value="9">Canberra</option>
+        <option value="10">Cobar</option>
+        <option value="11">CoffsHarbour</option>
+        <option value="12">Dartmoor</option>
+        <option value="13">Darwin</option>
+        <option value="14">GoldCoast</option>
+        <option value="15">Hobart</option>
+        <option value="16">Katherine</option>
+        <option value="17">Launceston</option>
+        <option value="18">Melbourne</option>
+        <option value="19">MelbourneAirport</option>
+        <option value="20">Mildura</option>
+        <option value="21">Moree</option>
+        <option value="22">MountGambier</option>
+        <option value="23">MountGinini</option>
+        <option value="24">Newcastle</option>
+        <option value="25">Nhil</option>
+        <option value="26">NorahHead</option>
+        <option value="27">NorfolkIsland</option>
+        <option value="28">Nuriootpa</option>
+        <option value="29">PearceRAAF</option>
+        <option value="30">Penrith</option>
+        <option value="31">Perth</option>
+        <option value="32">PerthAirport</option>
+        <option value="33">Portland</option>
+        <option value="34">Richmond</option>
+        <option value="35">Sale</option>
+        <option value="36">SalmonGums</option>
+        <option value="37">Sydney</option>
+        <option value="38">SydneyAirport</option>
+        <option value="39">Townsville</option>
+        <option value="40">Tuggeranong</option>
+        <option value="41">Uluru</option>
+        <option value="42">WaggaWagga</option>
+        <option value="43">Walpole</option>
+        <option value="44">Watsonia</option>
+        <option value="45">Williamtown</option>
+        <option value="46">Witchcliffe</option>
+        <option value="47">Wollongong</option>
+        <option value="48">Woomera</option>
+      </select>
+
+      <button type="submit" class="btn-submit">Predecir Semana</button>
+    </form>
+  </main>
+
+    <!-- Pie de página -->
+    <footer class="footer">
+      <div class="footer-links">
+        <ul>
+          <li><a href="#nosotros">Sobre Nosotros</a></li>
+          <li><a href="#servicios">Servicios</a></li>
+          <li><a href="#contacto">Contacto</a></li>
+          <li><a href="#">Términos y Condiciones</a></li>
+        </ul>
+      </div>
+      <div class="social-links">
+        <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+        <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+        <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+        <a href="#" aria-label="TikTok"><i class="fab fa-tiktok"></i></a>
+        <a href="#" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
+      </div>
+      <div class="copyright">
+        <p>&copy; 2023 TourXtreme - Todos los derechos reservados</p>
+      </div>
+    </footer>
+
+    <script src="../static/js/script.js"></script>
+  </body>
+</html>
