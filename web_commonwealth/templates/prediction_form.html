@@ -12,30 +12,29 @@
     />
   </head>
   <body>
-    <!-- Menú de navegación -->
-    <header class="menu-container">
-      <nav class="navbar">
-        <div class="navbar-brand">
-          <a href="{{ url_for('home')}}">
+  <!-- Menú de navegación -->
+  <header class="menu-container">
+    <nav class="navbar">
+      <div class="navbar-br and">
+        <a href="{{ url_for('home')}}">
           <img src="{{ url_for('static', filename='assets/img/logo.jpeg') }}" alt="TourXtreme Logo" class="logo">
         </a>
+      </div>
+      <button class="navbar-toggler">
+        <div class="hamburger">
+          <span></span>
         </div>
-        <button class="navbar-toggler">
-          <div class="hamburger">
-            <span></span>
-            <span></span>
-            <span></span>
-          </div>
-        </button>
-        <div class="navbar-collapse">
-          <div style="padding-right: 10px" class="navbar-actions">
-            <a href="{{ url_for('home') }}" class="btn-primary"
-              >Volver a Inicio</a
-            >
-          </div>
+      </button>
+      <div class="navbar-collapse">
+        <ul class="navbar-nav">
+          <li><a href="{{ url_for('prediction_table')}}">Historial de Predicciones</a></li>
+        </ul>
+        <div style="padding-right:10px" class="navbar-actions">
+          <a href="{{ url_for('home')}}" class="btn-primary">Volver a Inicio</a>
         </div>
-      </nav>
-    </header>
+      </div>
+    </nav>
+  </header>
 
     <!-- Formulario para predicción -->
     <main class="form-container" style="padding: 20px; max-width: 700px; margin: auto">

@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Resultados de la Predicción</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <style>
+      /* Contenedor para título + icono */
+      .toggle-header {
+        display: flex;
+        align-items: center;
+        cursor: pointer;
+        user-select: none;
+        gap: 10px;
+        padding: 15px;
+      }
+      .toggle-header h2 {
+        margin: 0;
+        font-weight: bold;
+      }
+      /* Flecha que rota */
+      .toggle-icon {
+        transition: transform 0.3s ease;
+        font-size: 18px;
+      }
+      /* Rotar 180 grados cuando activo */
+      .toggle-header.active .toggle-icon {
+        transform: rotate(180deg);
+      }
+
+      /* Espacio para la tabla */
+      .predictions-table {
+        margin-top: 10px;
+        margin-bottom: 40px;
+      }
+    </style>
+</head>
+<body>
+<!-- Menú de navegación -->
+<header class="menu-container">
+  <nav class="navbar">
+    <div class="navbar-brand">
+      <a href="{{ url_for('home') }}">
+        <img src="{{ url_for('static', filename='assets/img/logo.jpeg') }}" alt="TourXtreme Logo" class="logo">
+      </a>
+    </div>
+    <button class="navbar-toggler">
+      <div class="hamburger">
+        <span></span>
+        <span></span>
+        <span></span>
+      </div>
+    </button>
+    <div class="navbar-collapse">
+      <div style="padding-right: 10px" class="navbar-actions">
+        <a href="{{ url_for('home') }}" class="btn-primary">Volver a Inicio</a>
+      </div>
+    </div>
+  </nav>
+</header>
+
+<!-- Contenido de predicciones -->
+<div class="all-predictions">
+
+  {% if all_predictions %}
+    {% for location_name, predicciones in all_predictions.items() %}
+
+      <!-- Header con título y flecha desplegable -->
+      <div class="toggle-header" onclick="toggleTable('table-{{ loop.index }}', this)">
+        <h2>Predicciones historicas de Actividades en {{ location_name }}</h2>
+        <i class="fas fa-chevron-down toggle-icon"></i>
+      </div>
+
+      <!-- Tabla oculta inicialmente -->
+      <div id="table-{{ loop.index }}" class="predictions-table" style="display:none;">
+        <table>
+          <thead>
+            <tr>
+              <th colspan="3">{{ location_name }}</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for fecha, actividades in predicciones.items() %}
+            <tr class="date-row">
+              <td colspan="3">{{ fecha }}</td>
+            </tr>
+            <tr class="activities-row">
+              {% for actividad, resultado in actividades.items() %}
+              <td class="activity-cell">
+                {% if actividad == 'activity_Buceo' %}
+                  <img src="{{ url_for('static', filename='assets/img/activities/Buceo01.png') if resultado else url_for('static', filename='assets/img/activities/Buceo00.png') }}" alt="Buceo">
+                  <p>Buceo</p>
+                {% elif actividad == 'activity_Camping' %}
+                  <img src="{{ url_for('static', filename='assets/img/activities/Camping01.png') if resultado else url_for('static', filename='assets/img/activities/Camping00.png') }}" alt="Camping">
+                  <p>Camping</p>
+                {% elif actividad == 'activity_Ciclismo' %}
+                  <img src="{{ url_for('static', filename='assets/img/activities/Ciclismo01.png') if resultado else url_for('static', filename='assets/img/activities/Ciclismo00.png') }}" alt="Ciclismo">
+                  <p>Ciclismo</p>
+                {% elif actividad == 'activity_Kayak' %}
+                  <img src="{{ url_for('static', filename='assets/img/activities/Kayak01.png') if resultado else url_for('static', filename='assets/img/activities/Kayak00.png') }}" alt="Kayak">
+                  <p>Kayak</p>
+                {% elif actividad == 'activity_Senderismo' %}
+                  <img src="{{ url_for('static', filename='assets/img/activities/Senderismo01.png') if resultado else url_for('static', filename='assets/img/activities/Senderismo00.png') }}" alt="Senderismo">
+                  <p>Senderismo</p>
+                {% elif actividad == 'activity_Surf' %}
+                  <img src="{{ url_for('static', filename='assets/img/activities/Surf01.png') if resultado else url_for('static', filename='assets/img/activities/Surf00.png') }}" alt="Surf">
+                  <p>Surf</p>
+                {% endif %}
+                <span class="activity-status {% if resultado %}available{% else %}unavailable{% endif %}">
+                  {% if resultado %}Disponible{% else %}No disponible{% endif %}
+                </span>
+              </td>
+              {% endfor %}
+            </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      </div>
+
+      <hr>
+
+    {% endfor %}
+  {% else %}
+    <p>No hay predicciones guardadas todavía.</p>
+  {% endif %}
+
+</div>
+
+<!-- Botón volver arriba -->
+<a href="#" class="scroll-to-top" title="Volver arriba">
+  <i class="fas fa-arrow-up"></i>
+</a>
+
+<script>
+  function toggleTable(id, headerElement) {
+    const tableDiv = document.getElementById(id);
+    if (tableDiv.style.display === "none") {
+      tableDiv.style.display = "block";
+      headerElement.classList.add('active');
+    } else {
+      tableDiv.style.display = "none";
+      headerElement.classList.remove('active');
+    }
+  }
+
+  const scrollButton = document.querySelector('.scroll-to-top');
+
+  window.addEventListener('scroll', () => {
+    scrollButton.style.display = window.scrollY > 300 ? 'block' : 'none';
+  });
+
+  scrollButton.addEventListener('click', function (e) {
+    e.preventDefault();
+    window.scrollTo({
+      top: 0,
+      behavior: 'smooth'
+    });
+  });
+</script>
+
+</body>
+</html>
