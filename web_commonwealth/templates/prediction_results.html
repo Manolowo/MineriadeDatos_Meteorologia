@@ -4,9 +4,10 @@
     <meta charset="UTF-8">
     <title>Resultados de la Predicción</title>
     <link rel="stylesheet" href="../static/css/styles.css">
+
 </head>
     <body>
-            <!-- Menú de navegación -->
+<!-- Menú de navegación -->
     <header class="menu-container">
       <nav class="navbar">
         <div class="navbar-brand">
@@ -31,13 +32,95 @@
       </nav>
     </header>
 
-    <h2>Resultado de la Predicción para la Semana</h2>
-    <ul>
-        {% for dia, valor in predicciones.items() %}
-        <li><strong>{{ dia }}:</strong> {{ valor }}</li>
-        {% endfor %}
-    </ul>
+      <div class="predictions-table">
+        <table>
+          <thead>
+            <tr>
+              <th colspan="3">Predicción de Actividades</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for fecha, actividades in predicciones.items() %}
+            <tr class="date-row">
+              <td colspan="3">{{ fecha }}</td>
+            </tr>
+            <tr class="activities-row">
+              {% for actividad, resultado in actividades.items() %}
+              <td class="activity-cell">
+                {% if actividad == 'activity_Buceo' %}
+                  <img src="{{ url_for('static', filename='assets/img/activities/Buceo01.png') if resultado else url_for('static', filename='assets/img/activities/Buceo00.png') }}" alt="Buceo">
+                  <p>Buceo</p>
+                  <span class="activity-status {% if resultado %}available{% else %}unavailable{% endif %}">
+                    {% if resultado %}Disponible{% else %}No disponible{% endif %}
+                  </span>
 
-    <a href="{{ url_for('prediction_form') }}">Volver al formulario</a>
+                {% elif actividad == 'activity_Camping' %}
+                  <img src="{{ url_for('static', filename='assets/img/activities/Camping01.png') if resultado else url_for('static', filename='assets/img/activities/Camping00.png') }}" alt="Camping">
+                  <p>Camping</p>
+                  <span class="activity-status {% if resultado %}available{% else %}unavailable{% endif %}">
+                    {% if resultado %}Disponible{% else %}No disponible{% endif %}
+                  </span>
+
+                {% elif actividad == 'activity_Ciclismo' %}
+                  <img src="{{ url_for('static', filename='assets/img/activities/Ciclismo01.png') if resultado else url_for('static', filename='assets/img/activities/Ciclismo00.png') }}" alt="Ciclismo">
+                  <p>Ciclismo</p>
+                  <span class="activity-status {% if resultado %}available{% else %}unavailable{% endif %}">
+                    {% if resultado %}Disponible{% else %}No disponible{% endif %}
+                  </span>
+
+                {% elif actividad == 'activity_Kayak' %}
+                  <img src="{{ url_for('static', filename='assets/img/activities/Kayak01.png') if resultado else url_for('static', filename='assets/img/activities/Kayak00.png') }}" alt="Kayak">
+                  <p>Kayak</p>
+                  <span class="activity-status {% if resultado %}available{% else %}unavailable{% endif %}">
+                    {% if resultado %}Disponible{% else %}No disponible{% endif %}
+                  </span>
+
+                {% elif actividad == 'activity_Senderismo' %}
+                  <img src="{{ url_for('static', filename='assets/img/activities/Senderismo01.png') if resultado else url_for('static', filename='assets/img/activities/Senderismo00.png') }}" alt="Senderismo">
+                  <p>Senderismo</p>
+                  <span class="activity-status {% if resultado %}available{% else %}unavailable{% endif %}">
+                    {% if resultado %}Disponible{% else %}No disponible{% endif %}
+                  </span>
+
+                {% elif actividad == 'activity_Surf' %}
+                  <img src="{{ url_for('static', filename='assets/img/activities/Surf01.png') if resultado else url_for('static', filename='assets/img/activities/Surf00.png') }}" alt="Surf">
+                  <p>Surf</p>
+                  <span class="activity-status {% if resultado %}available{% else %}unavailable{% endif %}">
+                    {% if resultado %}Disponible{% else %}No disponible{% endif %}
+                  </span>
+                {% endif %}
+              </td>
+              {% endfor %}
+            </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+        
+        <div class="back-link">
+          <a href="{{ url_for('prediction_form') }}">Volver al formulario para otra predicción</a>
+        </div>
+      </div>
+
+<!-- Botón volver arriba -->
+  <a href="#" class="scroll-to-top" title="Volver arriba">
+    <i class="fas fa-arrow-up"></i>
+  </a>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <script>
+      const scrollButton = document.querySelector('.scroll-to-top');
+
+      window.addEventListener('scroll', () => {
+        scrollButton.style.display = window.scrollY > 300 ? 'block' : 'none';
+      });
+
+      scrollButton.addEventListener('click', function (e) {
+        e.preventDefault();
+        window.scrollTo({
+          top: 0,
+          behavior: 'smooth'
+        });
+      });
+  </script>
+
     </body>
 </html>

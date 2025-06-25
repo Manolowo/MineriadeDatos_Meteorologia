@@ -78,7 +78,7 @@
         <div class="service-content">
           <h3>Surf</h3>
           <p>Aprende a domar las olas con instructores certificados. Clases para principiantes y avanzados en las mejores playas.</p>
-          <a href="" class="btn-secondary">Ver más</a>
+          <a href="#" class="btn-secondary">Ver más</a>
         </div>
       </div>
       <div class="service-card">
@@ -232,6 +232,11 @@
     </div>
   </section>
 
+  <!-- Botón volver arriba -->
+  <a href="#" class="scroll-to-top" title="Volver arriba">
+    <i class="fas fa-arrow-up"></i>
+  </a>
+
   <!-- Pie de página -->
   <footer class="footer">
     <div class="footer-links">
@@ -256,5 +261,21 @@
 
   <script src="../static/js/script.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <script>
+    const scrollButton = document.querySelector('.scroll-to-top');
+
+    window.addEventListener('scroll', () => {
+      scrollButton.style.display = window.scrollY > 300 ? 'block' : 'none';
+    });
+
+    scrollButton.addEventListener('click', function (e) {
+      e.preventDefault();
+      window.scrollTo({
+        top: 0,
+        behavior: 'smooth'
+      });
+    });
+  </script>
 </body>
 </html>
